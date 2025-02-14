@@ -12,10 +12,8 @@ class DataLoader:
     def data_load(self, path):
 
         try:
-            # data=NOTEBOOK_DATA
 
             df=pd.read_csv(path)
-            df.columns=df.columns.str.strip()
 
             # split into train test data
             train_data, test_data = train_test_split(df, test_size= TEST_SIZE, random_state=42)
