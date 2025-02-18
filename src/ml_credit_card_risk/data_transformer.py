@@ -38,7 +38,6 @@ class DataTransformation:
             ).columns
             cat_features = xtrain_data.select_dtypes(include=["object"]).columns
 
-            # preprocess
 
             num_transformer = Pipeline(
                 [
