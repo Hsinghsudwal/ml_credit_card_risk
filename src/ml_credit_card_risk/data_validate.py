@@ -1,8 +1,6 @@
-import pandas as pd
 from scipy.stats import ks_2samp
-from src.constants import ARTIFACT,  VALIDATE_PATH, TRAIN_VAL, TEST_VAL
+from src.constants import ARTIFACT, VALIDATE_PATH, TRAIN_VAL, TEST_VAL
 import os
-import json
 
 
 class DataValidation:
@@ -31,7 +29,7 @@ class DataValidation:
                         os.path.join(validate_data_path, str(TEST_VAL)),
                         index=False,
                     )
-                    
+
                     return train_data, test_data
 
         except Exception as e:
