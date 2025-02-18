@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Risk Prediction</title>
+</head>
+<body>
+    <h1>Credit Risk Prediction</h1>
+
+    <form method="POST">
+        <label for="person_age">Person Age:</label>
+        <input type="number" name="person_age" step="any" required><br><br>
+
+        <label for="person_income">Person Income:</label>
+        <input type="number" name="person_income" step="any" required><br><br>
+
+        <label for="person_home_ownership">Home Ownership:</label>
+        <select name="person_home_ownership" required>
+            <option value="RENT">RENT</option>
+            <option value="MORTGAGE">MORTGAGE</option>
+            <option value="OWN">OWN</option>
+            <option value="OTHER">OTHER</option>
+        </select><br><br>
+
+        <label for="person_emp_length">Employment Length:</label>
+        <input type="number" name="person_emp_length" step="any" required><br><br>
+
+        <label for="loan_intent">Loan Intent:</label>
+        <select name="loan_intent" required>
+            <option value="PERSONAL">PERSONAL</option>
+            <option value="EDUCATION">EDUCATION</option>
+            <option value="MEDICAL">MEDICAL</option>
+            <option value="VENTURE">VENTURE</option>
+            <option value="HOMEIMPROVEMENT">HOMEIMPROVEMENT</option>
+            <option value="DEBTCONSOLIDATION">DEBTCONSOLIDATION</option>
+        </select><br><br>
+
+        <label for="loan_grade">Loan Grade:</label>
+        <select name="loan_grade" required>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+            <option value="E">E</option>
+            <option value="F">F</option>
+            <option value="G">G</option>
+        </select><br><br>
+
+        <label for="loan_amnt">Loan Amount:</label>
+        <input type="number" name="loan_amnt" step="any" required><br><br>
+
+        <label for="loan_int_rate">Loan Interest Rate:</label>
+        <input type="number" name="loan_int_rate" step="any" required><br><br>
+
+        <label for="loan_percent_income">Loan Percent of Income:</label>
+        <input type="number" name="loan_percent_income" step="any" required><br><br>
+
+        <label for="cb_person_default_on_file">Person Default on File:</label>
+        <select name="cb_person_default_on_file" required>
+            <option value="Y">Y</option>
+            <option value="N">N</option>
+        </select><br><br>
+
+        <label for="cb_person_cred_hist_length">Credit History Length:</label>
+        <input type="number" name="cb_person_cred_hist_length" step="any" required><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if status %}
+        <h2>Prediction Result: {{ status }}</h2>
+    {% endif %}
+</body>
+</html>

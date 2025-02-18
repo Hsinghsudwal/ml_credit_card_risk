@@ -1,0 +1,9 @@
+docker
+Flask
+gunicorn
+joblib
+pandas
+xgboost
+scikit-learn
+boto3
+localstack-client
