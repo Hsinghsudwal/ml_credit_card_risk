@@ -20,6 +20,8 @@ class DataValidation:
                 else:
                     validate_data_path = os.path.join(ARTIFACT, VALIDATE_PATH)
                     os.makedirs(validate_data_path, exist_ok=True)
+                    
+                    
                     # save train test to csv
                     train_data.to_csv(
                         os.path.join(validate_data_path, str(TRAIN_VAL)),
