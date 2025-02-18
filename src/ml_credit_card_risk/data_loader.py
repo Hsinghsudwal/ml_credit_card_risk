@@ -15,7 +15,6 @@ class DataLoader:
 
             df = pd.read_csv(path)
 
-            # split into train test data
             train_data, test_data = train_test_split(df, test_size=0.2, random_state=42)
 
             raw_data_path = os.path.join(ARTIFACT, RAW_PATH)
