@@ -40,8 +40,8 @@ class TrainingPipeline:
 
         # Step 4: Model-Trainer
         log_step("Starting model trainer")
-        # modeltrain = ModelTrainer()
-        # model_in, param_in = modeltrain.model_trainer(X_train, y_train)
+        modeltrain = ModelTrainer()
+        model_in, param_in = modeltrain.model_trainer(X_train, y_train)
         # self.outputs["params"] = param_in
         log_step("Model trainer completed")
 
@@ -51,10 +51,11 @@ class TrainingPipeline:
         model_path = "artifact/model/model.joblib"
         modeleval = ModelEvaluation()
 
-        model, params = modeleval.model_evaluation(model_path, X_test, y_test)
-        # self.outputs["model"] = model
-        # self.outputs["params"] = params
+        model, params = modeleval.model_evaluation(model_in, param_in, X_test, y_test)
+        # model, params = modeleval.model_evaluation(model_path, X_test, y_test)
+        self.outputs["model"] = model
+        self.outputs["params"] = params
         log_step("Model evaluate completed")
 
         log_step("Training pipeline executed.")
-        return self.outputs
+        return self.outputs, model, params
