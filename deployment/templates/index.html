@@ -9,6 +9,12 @@
     <h1>Credit Risk Prediction</h1>
 
     <form method="POST">
+
+        <label for="use_s3_yes">Use S3 for model?</label>
+        <input type="radio" id="use_s3_yes" name="use_s3" value="yes" {% if use_s3 %}checked{% endif %}> Yes
+        <input type="radio" id="use_s3_no" name="use_s3" value="no" {% if not use_s3 %}checked{% endif %}> No
+
+        <br><br>
         <label for="person_age">Person Age:</label>
         <input type="number" name="person_age" step="any" required><br><br>
 
@@ -69,7 +75,7 @@
     </form>
 
     {% if status %}
-        <h2>Prediction Result: {{ status }}</h2>
+        <h2>Prediction: {{ status }}</h2>
     {% endif %}
 </body>
 </html>

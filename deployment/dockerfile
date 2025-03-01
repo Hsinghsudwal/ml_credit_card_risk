@@ -1,17 +1,24 @@
 
 FROM python:3.10-slim
 
-WORKDIR /app
 
-COPY requirements.txt /app/
-RUN pip install -r requirements.txt
+WORKDIR /deployment
 
-RUN pip install localstack-client boto3
 
-COPY . /app/
+COPY requirements.txt /deployment/
+
+
+RUN pip install --upgrade pip
+
+
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir localstack-client boto3
+
+
+COPY . /deployment/
+
 
 EXPOSE 9696
 
-ENTRYPOINT [ "gunicorn", "--bind=0.0.0.0:9696", "app:app" ]
 
-
+ENTRYPOINT ["gunicorn", "--bind=0.0.0.0:9696", "app:app"]
