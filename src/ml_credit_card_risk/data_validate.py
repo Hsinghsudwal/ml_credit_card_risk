@@ -1,6 +1,8 @@
 from scipy.stats import ks_2samp
 from src.constants import ARTIFACT, VALIDATE_PATH, TRAIN_VAL, TEST_VAL
 import os
+import prefect
+from prefect import task
 
 
 class DataValidation:
@@ -8,6 +10,7 @@ class DataValidation:
     def __init__(self) -> None:
         pass
 
+    @task
     def data_validation(self, train_data, test_data):
         try:
 
@@ -20,8 +23,7 @@ class DataValidation:
                 else:
                     validate_data_path = os.path.join(ARTIFACT, VALIDATE_PATH)
                     os.makedirs(validate_data_path, exist_ok=True)
-                    
-                    
+
                     # save train test to csv
                     train_data.to_csv(
                         os.path.join(validate_data_path, str(TRAIN_VAL)),

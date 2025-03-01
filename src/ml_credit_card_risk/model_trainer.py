@@ -4,12 +4,15 @@ import pandas as pd
 from xgboost import XGBClassifier
 from src.constants import ARTIFACT, MODEL, CLF
 from sklearn.model_selection import GridSearchCV
+import prefect
+from prefect import task
 
 
 class ModelTrainer:
     def __init__(self) -> None:
         pass
 
+    @task
     def model_trainer(self, X_train, y_train):
         try:
             model = XGBClassifier()
@@ -43,7 +46,7 @@ class ModelTrainer:
             os.makedirs(model_path, exist_ok=True)
 
             model_filename = os.path.join(model_path, CLF)
-            # joblib.dump((best_model, best_params), model_filename)
+
             joblib.dump({"model": best_model, "params": best_params}, model_filename)
 
             return best_model, best_params

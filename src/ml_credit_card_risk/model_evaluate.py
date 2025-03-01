@@ -20,6 +20,8 @@ from src.constants import (
     METRIC,
     MATRIX,
 )
+import prefect
+from prefect import task
 
 
 class ModelEvaluation:
@@ -27,6 +29,7 @@ class ModelEvaluation:
     def __init__(self) -> None:
         pass
 
+    @task
     def evaluate_clf(true, predicted):
         accuracy = accuracy_score(true, predicted)
         f1 = f1_score(true, predicted)
@@ -36,8 +39,8 @@ class ModelEvaluation:
 
         return accuracy, f1, precision, recall, roc_auc
 
-    def model_evaluation(self, model, params, X_test,y_test):
-    # def model_evaluation(self, path, X_test, y_test):
+    def model_evaluation(self, model, params, X_test, y_test):
+        # def model_evaluation(self, path, X_test, y_test):
         try:
 
             # modeled = joblib.load(path)

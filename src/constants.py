@@ -15,6 +15,7 @@ TEST_VAL = "vali_test.csv"
 
 # Data Transformation
 TRANSFORM = "transform"
+PROCESSOR = "transformer.pkl"
 XTRAIN_TRANS = "x_train.csv"
 XTEST_TRANS = "x_test.csv"
 YTRAIN_TRANS = "y_train.csv"

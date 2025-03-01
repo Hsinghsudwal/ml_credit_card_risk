@@ -2,6 +2,8 @@ import pandas as pd
 import os
 from src.constants import ARTIFACT, RAW_PATH, TRAIN, TEST
 from sklearn.model_selection import train_test_split
+import prefect
+from prefect import task, Flow
 
 
 class DataLoader:
@@ -9,6 +11,7 @@ class DataLoader:
     def __init__(self) -> None:
         pass
 
+    @task
     def data_load(self, path):
 
         try:

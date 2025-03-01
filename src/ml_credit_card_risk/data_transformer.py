@@ -2,6 +2,7 @@ import pandas as pd
 from src.constants import (
     ARTIFACT,
     TRANSFORM,
+    PROCESSOR,
     XTRAIN_TRANS,
     XTEST_TRANS,
     YTRAIN_TRANS,
@@ -12,6 +13,9 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
 from sklearn.compose import ColumnTransformer
+import joblib
+import prefect
+from prefect import task
 
 
 class DataTransformation:
@@ -19,6 +23,7 @@ class DataTransformation:
     def __init__(self) -> None:
         pass
 
+    @task
     def data_transformation(self, train_data, test_data):
         try:
 
@@ -37,7 +42,6 @@ class DataTransformation:
                 include=["int64", "float64"]
             ).columns
             cat_features = xtrain_data.select_dtypes(include=["object"]).columns
-
 
             num_transformer = Pipeline(
                 [
@@ -82,6 +86,9 @@ class DataTransformation:
 
             transformer_path = os.path.join(ARTIFACT, TRANSFORM)
             os.makedirs(transformer_path, exist_ok=True)
+
+            joblib.dump(preprocessor, os.path.join(transformer_path, PROCESSOR))
+
             X_train.to_csv(os.path.join(transformer_path, str(XTRAIN_TRANS)))
             X_test.to_csv(os.path.join(transformer_path, str(XTEST_TRANS)))
 
