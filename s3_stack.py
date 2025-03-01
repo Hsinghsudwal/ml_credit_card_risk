@@ -1,21 +1,27 @@
 import boto3
 
-# using LocalStack
-s3 = boto3.client(
-    "s3",
-    endpoint_url="http://localhost:4566",
-    aws_access_key_id="test",
-    aws_secret_access_key="test",
-    region_name="us-east-1",
-)
 
-bucket_name = "my-bucket"
-model_file_path = "artifact/experiment/Production/xgboost.pkl"
+def localstack_s3():
+    # Using LocalStack
+    s3 = boto3.client(
+        "s3",
+        endpoint_url="http://localhost:4566",
+        aws_access_key_id="test",
+        aws_secret_access_key="test",
+        region_name="us-east-1",
+    )
 
-# Create bucket
-s3.create_bucket(Bucket=bucket_name)
+    bucket_name = "risk-bucket"
+    model_file_path = "artifact/experiment/Production/xgboost.pkl"
+    processor_path = "artifact/transform/transformer.pkl"
 
-# Upload model file to S3
-s3.upload_file(model_file_path, bucket_name, "s3_model.pkl")
+    # Create bucket
+    s3.create_bucket(Bucket=bucket_name)
 
-print(f"Model uploaded to S3 bucket {bucket_name} with key 's3_model.pkl'")
+    # Upload model file to S3
+    s3.upload_file(model_file_path, bucket_name, "s3_risk_model.pkl")
+
+    # Upload processor file to S3
+    s3.upload_file(processor_path, bucket_name, "s3_transformer.pkl")
+
+    print(f"Model and processor uploaded to S3 bucket {bucket_name}")
