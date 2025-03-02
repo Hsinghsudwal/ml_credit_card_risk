@@ -1,7 +1,6 @@
 import pytest
 
 
-
 class TestData:
 
     def test_data():
