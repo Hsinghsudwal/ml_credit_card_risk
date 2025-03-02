@@ -1,0 +1,103 @@
+version: '3.8'
+
+
+services:
+  localstack:
+    image: localstack/localstack
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+      - SERVICES=s3,sns,lambda
+    ports:
+      - "4566:4566"  # LocalStack API gateway
+      - "4510-4559:4510-4559"  # Optional for exposing more ports
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - localstack_network
+    restart: always
+
+  flask-app:
+    build: ./deployment
+    ports:
+      - "9696:9696"
+    depends_on:
+      - localstack  
+    environment:
+      - S3_ENDPOINT_URL=http://localstack:4566
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    networks:
+      - localstack_network
+
+  monitor-app:
+    build: ./monitoring
+    ports:
+      - "8501:8501"
+    depends_on:
+      - localstack
+    environment:
+      - S3_ENDPOINT_URL=http://localstack:4566
+      - AWS_ACCESS_KEY_ID=test
+      - AWS_SECRET_ACCESS_KEY=test
+      - AWS_DEFAULT_REGION=us-east-1
+    networks:
+      - localstack_network
+
+
+networks:
+  localstack_network:
+    driver: bridge
+ 
+
+
+
+  
+
+
+
+
+  # # Database Service (PostgreSQL)
+  # db:
+  #   image: postgres
+  #   restart: always
+  #   environment:
+  #     POSTGRES_PASSWORD: example
+  #   ports:
+  #     - "5432:5432"
+  #   networks:
+  #     - back-tier
+
+
+  # # Adminer Service (Database UI)
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - back-tier
+  #     - front-tier
+
+
+
+  
+
+  # # Wait for DB Service (optional, if you want to ensure DB is ready before others start)
+  # wait-for-db:
+  #   image: atkrad/wait4x
+  #   depends_on:
+  #     - db
+  #   command: tcp db:5432 -t 90s -i 250ms
+  #   networks:
+  #     - back-tier
+
+# networks:
+#   localstack_network:
+#     driver: bridge
+#   back-tier:
+#     driver: bridge
+#   front-tier:
+#     driver: bridge
+#   monitoring:
+#     driver: bridge
