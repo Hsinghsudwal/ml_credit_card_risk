@@ -1,0 +1,12 @@
+pandas
+joblib
+streamlit
+sqlalchemy
+plotly
+prefect
+evidently
+boto3
+docker
+xgboost
+scikit-learn
+localstack-client
