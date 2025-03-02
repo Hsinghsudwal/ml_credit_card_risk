@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 requires-python = ">=3.10"
-name = "ml-credit-card-risk"
+name = "ml_credit_card_risk"
 readme = "README.md"
 dynamic = ["dependencies"]
 
