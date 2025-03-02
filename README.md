@@ -1,6 +1,10 @@
 # Credit Card Risk
-The aim of the project is to build end-to-end mlops pipeline.
+The aim of the project is to build end-to-end ml pipeline.
 
+![Pandas](https://img.shields.io/badge/Pandas-2C2D72?style=for-the-badge&logo=pandas&logoColor=white)
+![MIT](https://img.shields.io/badge/MIT-yellow?style=for-the-badge)
+![Streamlit](https://img.shields.io/badge/Streamlit-FF4B4B?style=for-the-badge&logo=Streamlit&logoColor=white)
+![flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white) ![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)
 ## Table of Content
 - [Problem Statement](#problem-statement)
 - [Installation](#installation)
